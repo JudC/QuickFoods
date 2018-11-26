@@ -1,5 +1,5 @@
 <resources>
-    <string name="Food">Test</string>
+    <string name="app_name">QuickFoods</string>
     <string name="search_hint">Search using ingredients seperate with commas</string>
     <string name="API_KEY">5ab2b60fffab514bf00ba73304e57af1</string>
 </resources>
