@@ -52,7 +52,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
             boolean expanded = recipes.isExpanded();
 
             detail.setVisibility(expanded? View.VISIBLE : View.GONE);
-            recipe_link.setText("ASDASD");
+            recipe_link.setText(recipes.getPublisherUrl());
             Log.d("adapter", "" + detail.getVisibility());
         }
     }
