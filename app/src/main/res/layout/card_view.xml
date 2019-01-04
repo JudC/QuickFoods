@@ -47,11 +47,14 @@
 
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/recipe_link"
+            <Button
+                android:id="@+id/recipe_link_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"/>
+                android:text="Visit Recipe"
+                android:textSize="18sp"
+                android:padding="10dp"
+                android:layout_margin="10dp"/>
         </LinearLayout>
     </RelativeLayout>
 

@@ -1,12 +1,15 @@
 package com.example.jcai.food.recyclerview;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +18,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.jcai.food.api.models.Recipes;
 import com.example.jcai.test.R;
 
+import java.net.URI;
 import java.util.ArrayList;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by jcai on 3/15/18.
@@ -37,6 +43,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         public ImageView image;
         public View detail;
         public TextView recipe_link;
+        public Button recipe_link_button;
 
 
         public RecipesViewHolder(View itemView) {
@@ -44,16 +51,24 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
             title = itemView.findViewById(R.id.recipe_title);
             image = itemView.findViewById(R.id.recipe_image);
             detail = itemView.findViewById(R.id.recipe_detail);
-            recipe_link = itemView.findViewById(R.id.recipe_link);
+            recipe_link_button = itemView.findViewById(R.id.recipe_link_button);
             //  arrow = itemView.findViewById(R.id.arrow);
         }
 
-        private void setVisibility(Recipes recipes) {
+        private void setExpandVisibility(Recipes recipes) {
             boolean expanded = recipes.isExpanded();
 
             detail.setVisibility(expanded? View.VISIBLE : View.GONE);
-            recipe_link.setText(recipes.getPublisherUrl());
             Log.d("adapter", "" + detail.getVisibility());
+
+            recipe_link_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri uri = Uri.parse(recipes.getSourceUrl());
+                    Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                    mContext.startActivity(i);
+                }
+            });
         }
     }
 
@@ -70,7 +85,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         TextView titleText = holder.title;
         titleText.setText(recipes.getTitle());
 
-        holder.setVisibility(recipes);
+        holder.setExpandVisibility(recipes);
 
         ImageView image = holder.image;
         glide.load(recipes.getImageUrl())
