@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class    MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecipesAdapter recipesAdapter;
     private SearchView searchView;
@@ -118,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
         // Get a handle to the RecyclerView.
         mRecyclerView = findViewById(R.id.cardList);
         mRecyclerView.setHasFixedSize(true);
+        ((SimpleItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+
 
         // Create an adapter and supply the data to be displayed.
         recipesAdapter = new RecipesAdapter(this, recipes, glide);

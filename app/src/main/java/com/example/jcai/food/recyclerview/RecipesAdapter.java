@@ -2,6 +2,8 @@ package com.example.jcai.food.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,13 +35,25 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
     public class RecipesViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public ImageView image;
+        public View detail;
+        public TextView recipe_link;
 
 
         public RecipesViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.recipe_title);
             image = itemView.findViewById(R.id.recipe_image);
+            detail = itemView.findViewById(R.id.recipe_detail);
+            recipe_link = itemView.findViewById(R.id.recipe_link);
             //  arrow = itemView.findViewById(R.id.arrow);
+        }
+
+        private void setVisibility(Recipes recipes) {
+            boolean expanded = recipes.isExpanded();
+
+            detail.setVisibility(expanded? View.VISIBLE : View.GONE);
+            recipe_link.setText("ASDASD");
+            Log.d("adapter", "" + detail.getVisibility());
         }
     }
 
@@ -52,14 +66,25 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
     @Override
     public void onBindViewHolder(RecipesAdapter.RecipesViewHolder holder, int position) {
         Recipes recipes = mRecipes.get(position);
+        boolean expanded = recipes.isExpanded();
         TextView titleText = holder.title;
         titleText.setText(recipes.getTitle());
+
+        holder.setVisibility(recipes);
 
         ImageView image = holder.image;
         glide.load(recipes.getImageUrl())
                 .apply(new RequestOptions().override(800,400)
                 .centerCrop())
                 .into(image);
+
+        holder.itemView.setOnClickListener(v -> {
+            recipes.setExpanded(!expanded);
+            notifyItemChanged(position);
+            Log.d("adapter", "isclicked " + recipes.isExpanded());
+        });
+
+
     }
 
     @Override

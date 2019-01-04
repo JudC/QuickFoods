@@ -6,7 +6,8 @@
     <dimen name="main_padding_bottom">10dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_corner_radius">4dp</dimen>
-    <dimen name="card_content_padding">16dp</dimen>
+    <dimen name="card_content_padding">0dp</dimen>
+    <dimen name="card_title_padding">3dp</dimen>
     <dimen name="card_margin">8dp</dimen>
     <dimen name="recyclerview_margin">8dp</dimen>
 </resources>

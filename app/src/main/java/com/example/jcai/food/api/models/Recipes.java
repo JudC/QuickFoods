@@ -30,6 +30,8 @@ public class Recipes {
     @Expose
     private String publisherUrl;
 
+    private boolean expanded;
+
     public String getPublisher() {
         return publisher;
     }
@@ -93,5 +95,9 @@ public class Recipes {
     public void setPublisherUrl(String publisherUrl) {
         this.publisherUrl = publisherUrl;
     }
+
+    public void setExpanded(boolean expanded){ this.expanded = expanded; }
+
+    public boolean isExpanded() { return expanded; };
 
 }
